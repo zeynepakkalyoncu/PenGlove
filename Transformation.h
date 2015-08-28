@@ -8,7 +8,7 @@ public:
 	double angularVelocity;
 	double relativeAcceleration;
 
-	//	vector<vector<double> > matrix;
+	std::vector<std::vector <double> > matrix;
 
 	double currentAngle;
 
@@ -19,12 +19,12 @@ public:
 	double posX;
 	double posY;
 	double posZ;
-	//public:	
-	Transformation();
+	
+	Transformation() : matrix(3, std::vector<double>(3)) {}
 
+	void getTransformationMatrix(double gyroXrate, double gyroYrate, double gyroZrate, double dt);
 	void cancelGravity(std::vector<double> realAcceleration);
 	double getRotationAngle(double angularVelocity, double dt);
-	std::vector<std::vector<double> > getTransformationMatrix(double gyroXrate, double gyroYrate, double gyroZrate, double dt);
 	std::vector<double> transformToNormal(double kalAngleX, double kalAngleY, double kalAngleZ, double gyroXrate, double gyroYrate, double gyroZrate, double dt);
 	double getAbsoluteVelocity(double kalAngleX, double kalAngleY, double kalAngleZ, double gyroXrate, double gyroYrate, double gyroZrate, double dt, int axis);
 	double getAbsolutePosition(double kalAngleX, double kalAngleY, double kalAngleZ, double gyroXrate, double gyroYrate, double gyroZrate, double dt, int axis);
