@@ -2,11 +2,6 @@
 #include <cmath>
 #include <vector>
 
-Transformation::Transformation(){
-	velocityX = 0;
-	velocityY = 0;
-}
-
 void Transformation::cancelGravity(std::vector<double> realAcceleration) {
 	realAcceleration[2] -= 9.81;
 }
@@ -16,23 +11,28 @@ double Transformation::getRotationAngle(double angularVelocity, double dt) {
 	return currentAngle;
 }
 
-std::vector<std::vector<double> > Transformation::getTransformationMatrix(double gyroXrate, double gyroYrate, double gyroZrate, double dt) {
+void Transformation::getTransformationMatrix(double gyroXrate, double gyroYrate, double gyroZrate, double dt) {
 	double alpha = getRotationAngle(gyroXrate, dt);
 	double beta = getRotationAngle(gyroYrate, dt);
 	double gamma = getRotationAngle(gyroZrate, dt);
-	std::vector<std::vector<double> > matrix = { { cos(beta)*cos(gamma), -sin(gamma), sin(beta) },
-	{ sin(gamma), cos(alpha)*cos(gamma), -sin(alpha) },
-	{ -sin(beta), sin(alpha), cos(alpha)*cos(beta) } };
-	return matrix;
+	matrix[0][0] = cos(beta)*cos(gamma);
+	matrix[0][1] = -sin(gamma);
+	matrix[0][2] = sin(beta);
+	matrix[1][0] = sin(gamma);
+	matrix[1][1] = cos(alpha)*cos(gamma);
+	matrix[1][2] = -sin(alpha);
+	matrix[2][0] = -sin(beta);
+	matrix[2][1] = sin(alpha);
+	matrix[2][2] = cos(alpha)*cos(beta);
 }
 
 std::vector<double> Transformation::transformToNormal(double kalAngleX, double kalAngleY, double kalAngleZ, double gyroXrate, double gyroYrate, double gyroZrate, double dt) {
-	std::vector<std::vector<double> > transformationMatrix = getTransformationMatrix(gyroXrate, gyroYrate, gyroZrate, dt);
-	std::vector<double> absoluteAcceleration;
+	getTransformationMatrix(gyroXrate, gyroYrate, gyroZrate, dt);
+	std::vector<double> absoluteAcceleration(3);
 	for (int i = 0; i < 3; i++) {
-		absoluteAcceleration[i] = kalAngleX * transformationMatrix[0][i]
-			+ kalAngleY * transformationMatrix[1][i]
-			+ kalAngleZ * transformationMatrix[2][i];
+		absoluteAcceleration[i] = kalAngleX * matrix[0][i]
+			+ kalAngleY * matrix[1][i]
+			+ kalAngleZ * matrix[2][i];
 	}
 	cancelGravity(absoluteAcceleration);
 	return absoluteAcceleration;
