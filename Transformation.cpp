@@ -11,6 +11,7 @@ double Transformation::getRotationAngle(double angularVelocity, double dt) {
 	return currentAngle;
 }
 
+// use quaternion rotation instead? more efficient
 void Transformation::getTransformationMatrix(double gyroXrate, double gyroYrate, double gyroZrate, double dt) {
 	double alpha = getRotationAngle(gyroXrate, dt);
 	double beta = getRotationAngle(gyroYrate, dt);
