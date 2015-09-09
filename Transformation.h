@@ -22,12 +22,12 @@ public:
 	
 	Transformation() : matrix(3, std::vector<double>(3)) {}
 
-	vgetTransformationMatrix(double gyroXangle, double gyroYangle, double gyroZangle, double dt);
+	void getTransformationMatrix(double gyroXrate, double gyroYrate, double gyroZrate, double dt);
 	void cancelGravity(std::vector<double> realAcceleration);
-//	double getRotationAngle(double angularVelocity, double dt);
-	std::vector<double> transformToNormal(double kalAngleX, double kalAngleY, double kalAngleZ, double gyroXangle, double gyroYangle, double gyroZangle, double dt);
-	double getAbsoluteVelocity(double kalAngleX, double kalAngleY, double kalAngleZ, double gyroXangle, double gyroYangle, double gyroZangle, double dt, int axis);
-	double getAbsolutePosition(double kalAngleX, double kalAngleY, double kalAngleZ, double gyroXangle, double gyroYangle, double gyroZangle, double dt, int axis);
+	double getRotationAngle(double angularVelocity, double dt);
+	std::vector<double> transformToNormal(double kalAngleX, double kalAngleY, double kalAngleZ, double gyroXrate, double gyroYrate, double gyroZrate, double dt);
+	double getAbsoluteVelocity(double kalAngleX, double kalAngleY, double kalAngleZ, double gyroXrate, double gyroYrate, double gyroZrate, double dt, int axis);
+	double getAbsolutePosition(double kalAngleX, double kalAngleY, double kalAngleZ, double gyroXrate, double gyroYrate, double gyroZrate, double dt, int axis);
 };
 
 
