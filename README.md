@@ -13,4 +13,6 @@ For a mini demonstration of the first prototype, visit:
 
 [![Arduino Glove](https://img.youtube.com/vi/E4OcadS2zEE/0.jpg)](https://www.youtube.com/watch?v=E4OcadS2zEE)
 
+<iframe width="420" height="315" src="https://www.youtube.com/embed/E4OcadS2zEE" frameborder="0" allowfullscreen></iframe>
+
 This version only involves the acquision/interpretation of accelerometer and gyroscope data, and display of the input in real time with a Processing-based GUI.
