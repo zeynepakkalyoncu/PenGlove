@@ -1,6 +1,6 @@
-# Data Glove as a Pen
+# Pen Glove
 
-Source code for a data glove built with an MPU6050 sensor and Arduino Uno.
+Source code for a data glove built with an MPU6050 sensor and Arduino Uno to be used as a virtual pen.
 
 Capabilities of the glove include:
 * Allow the user to write or draw by moving their hand in the air
