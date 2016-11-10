@@ -1,4 +1,4 @@
-# MPU6050
+# Data Glove as a Pen
 
 Source code for a data glove built with an MPU6050 sensor and Arduino Uno.
 
